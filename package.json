@@ -1,13 +1,13 @@
 {
   "name": "nzb-parser",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "NZB File Parser",
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
     "test": "node --experimental-strip-types --test ./test/*.ts"
   },
-  "keywords": [],
+  "keywords": ["nzb", "parser", "usenet", "newsgroups", "xml", "nntp", "news"],
   "author": "ThaUnknown",
   "license": "ISC",
   "dependencies": {

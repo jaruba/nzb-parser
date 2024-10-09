@@ -1,6 +1,6 @@
 import { XMLParser, XMLValidator } from 'fast-xml-parser'
 import { InvalidNZBError } from './exceptions.ts'
-import { NZB, File, Meta, Segment } from './models.ts'
+import { NZB, FileMeta, Meta, Segment } from './models.ts'
 
 const parser = new XMLParser({ ignoreAttributes: false })
 
@@ -82,14 +82,14 @@ function parseSegments (segmentdict: { [key: string]: any } | null): Segment[] {
   return segmentset.sort((a, b) => a.number - b.number)
 }
 
-function parseFiles (nzb: { [key: string]: any }): File[] {
+function parseFiles (nzb: { [key: string]: any }): FileMeta[] {
   const fileTags = nzb?.nzb?.file as FileFieldType
 
   if (fileTags === null || fileTags === undefined) {
     throw new SyntaxError('Missing or malformed <file>...</file>!')
   }
 
-  const files: File[] = []
+  const files: FileMeta[] = []
 
   for (const file of Array.isArray(fileTags) ? fileTags : [fileTags]) {
     const groupSet = new Set<string>()
@@ -103,7 +103,7 @@ function parseFiles (nzb: { [key: string]: any }): File[] {
       groups.forEach(group => groupSet.add(group))
     }
     files.push(
-      new File({
+      new FileMeta({
         poster: file['@_poster'],
         datetime: new Date(file['@_date'] * 1000),
         subject: file['@_subject'],

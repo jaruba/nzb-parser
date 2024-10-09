@@ -1,4 +1,3 @@
-// Meta class
 export class Meta {
   title?: string
   passwords: string[]
@@ -18,7 +17,6 @@ export class Meta {
   }
 }
 
-// Segment class
 export class Segment {
   size: number
   number: number
@@ -35,8 +33,7 @@ export class Segment {
   }
 }
 
-// File class
-export class File {
+export class FileMeta {
   poster: string
   datetime: Date
   subject: string
@@ -64,18 +61,17 @@ export class File {
   }
 }
 
-// NZB class
 export class NZB {
   meta: Meta
-  files: File[]
-  file: File
+  files: FileMeta[]
+  file: FileMeta
   size: number
   names: string[]
   posters: string[]
   groups: string[]
   par2Size: number
 
-  constructor (data: { meta?: Meta; files: File[] }) {
+  constructor (data: { meta?: Meta; files: FileMeta[] }) {
     this.meta = data.meta ?? new Meta()
     this.files = data.files
 
